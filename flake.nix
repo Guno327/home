@@ -24,8 +24,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    caelestia-shell = {
+      url = "github:caelestia-dots/shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     custom-pkgs = {
       url = "github:guno327/pkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nvf-flake = {
+      url = "github:guno327/nvf-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -35,6 +45,8 @@
     home-manager,
     sops-nix,
     zen-browser,
+    caelestia-shell,
+    nvf-flake,
     stylix,
     custom-pkgs,
     ...
@@ -42,37 +54,70 @@
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
   in {
+    # NixOS configurations
+    homeModules = {
+      nixos-desktop = {
+        imports = [
+          ./gunnar/nixos-desktop.nix
+          zen-browser.homeModules.twilight
+          caelestia-shell.homeManagerModules.default
+        ];
+        _module.args = {homeInputs = inputs;};
+      };
+      nixos-laptop = {
+        imports = [
+          ./gunnar/nixos-laptop.nix
+          zen-browser.homeModules.twilight
+          caelestia-shell.homeManagerModules.default
+        ];
+        _module.args = {homeInputs = inputs;};
+      };
+      nixos-server = {
+        imports = [
+          ./gunnar/nixos-server.nix
+          zen-browser.homeModules.twilight
+          caelestia-shell.homeManagerModules.default
+        ];
+        _module.args = {homeInputs = inputs;};
+      };
+    };
+
+    # Generic Linux configurations
     homeConfigurations = {
-      # NixOS configurations
-      "gunnar@nixos-desktop" = home-manager.lib.homemanagerconfiguration {
-        inherit pkgs;
-        extraspecialargs = {inherit inputs;};
-        modules = [
-        ];
-      };
-      "gunnar@nixos-laptop" = home-manager.lib.homemanagerconfiguration {
-        inherit pkgs;
-        extraspecialargs = {inherit inputs;};
-        modules = [
-        ];
-      };
-      "gunnar@nixos-server" = home-manager.lib.homemanagerconfiguration {
-        inherit pkgs;
-        extraspecialargs = {inherit inputs;};
+      "gunnar@nixos-laptop" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        extraSpecialArgs = {inherit inputs;};
         modules = [
         ];
       };
 
-      # Generic Linux configurations
-      "gunnar@ubuntu-desktop" = home-manager.lib.homemanagerconfiguration {
-        inherit pkgs;
-        extraspecialargs = {inherit inputs;};
+      "gunnar@nixos-desktop" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        extraSpecialArgs = {inherit inputs;};
+        modules = [
+          ./gunnar/nixos-desktop.nix
+          stylix.homeModules.default
+          caelestia-shell.homeManagerModules.default
+          zen-browser.homeModules.twilight
+        ];
+      };
+
+      "gunnar@nixos-server" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        extraSpecialArgs = {inherit inputs;};
         modules = [
         ];
       };
-      "gunnar@work-laptop" = home-manager.lib.homemanagerconfiguration {
+
+      "gunnar@ubuntu-desktop" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        extraspecialargs = {inherit inputs;};
+        extraSpecialArgs = {inherit inputs;};
+        modules = [
+        ];
+      };
+      "gunnar@work-laptop" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = {inherit inputs;};
         modules = [
         ];
       };

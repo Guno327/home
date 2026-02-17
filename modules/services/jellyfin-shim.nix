@@ -1,4 +1,5 @@
 {
+  pkgs,
   config,
   lib,
   ...
@@ -9,7 +10,7 @@ in {
   options.modules.services.jellyfin-shim.enable = mkEnableOption "enable jellyfin-mpv-shim configuration";
   config = mkIf cfg.enable {
     # Need mpv
-    config.options.modules.programs.mpv.enable = mkForce true;
+    modules.programs.mpv.enable = mkForce true;
 
     home.packages = with pkgs; [jellyfin-mpv-shim];
     services.jellyfin-mpv-shim = {

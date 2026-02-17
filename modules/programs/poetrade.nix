@@ -2,19 +2,17 @@
   config,
   lib,
   pkgs,
-  inputs,
+  homeInputs,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.modules.programs.poetrade;
-in
-{
+in {
   options.modules.programs.poetrade.enable = mkEnableOption "Enable and configure awakened poe trade";
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      inputs.custom-pkgs.packages."${stdenv.hostPlatform.system}".awakened-poe-trade
+      homeInputs.custom-pkgs.packages."${stdenv.hostPlatform.system}".awakened-poe-trade
     ];
 
     xdg.desktopEntries.awakened-poe-trade = {

@@ -1,6 +1,6 @@
 {
   pkgs,
-  inputs,
+  homeInputs,
   ...
 }: let
   startupScript = pkgs.writeScript "startup.sh" ''
@@ -18,9 +18,8 @@ in {
   home.packages = with pkgs; [
     discord
     r2modman
-    pkgs.stable.godot_4
-    inputs.custom-pkgs.packages."${stdenv.hostPlatform.system}".balatro-mobile-maker
-    inputs.custom-pkgs.packages."${stdenv.hostPlatform.system}".balatro-multiplayer
+    homeInputs.custom-pkgs.packages."${stdenv.hostPlatform.system}".balatro-mobile-maker
+    homeInputs.custom-pkgs.packages."${stdenv.hostPlatform.system}".balatro-multiplayer
     rusty-path-of-building
     orca-slicer
     gemini-cli
@@ -30,12 +29,10 @@ in {
     programs = {
       fish.enable = true;
       ripgrep.enable = true;
-      bat.enable = true;
       zoxide.enable = true;
       eza.enable = true;
       git.enable = true;
       fzf.enable = true;
-      monitor.enable = true;
       ssh.enable = true;
       devenv.enable = true;
       mpv.enable = true;

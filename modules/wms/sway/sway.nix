@@ -23,7 +23,7 @@ in {
     wallpaper = mkOption {
       type = types.path;
       description = "Path to wallpaper svg";
-      default = "../bg.svg";
+      default = "/home/${config.home.username}/.bg.svg";
     };
   };
 

@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  homeInputs,
+  pkgs,
+  ...
+}: {
   imports = [
     ./kitty.nix
     ./minecraft.nix
@@ -17,7 +21,6 @@
     ./eza.nix
     ./zoxide.nix
     ./ripgrep.nix
-    ./bat.nix
     ./fish.nix
     ./fzf.nix
     ./git.nix
@@ -26,16 +29,17 @@
   ];
 
   home.packages = with pkgs; [
-    wireshark
-    freecad
-    stable.gimp
-    qFlipper
-    audacity
-    xclicker
-    steam-tui
-    steamcmd
-    nvtopPackages.amd
-    mattermost-desktop
-    satisfactorymodmanager
+    homeInputs.nvf-flake.packages.${pkgs.stdenv.hostPlatform.system}.default
+    curl
+    wget
+    jq
+    htop
+    fd
+    tldr
+    rsync
+    ncdu
+    tmux
+    just
+    nvtopPackages.full
   ];
 }
