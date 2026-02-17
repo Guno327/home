@@ -9,8 +9,16 @@ with lib; let
 in {
   options.modules.wms.sway = {
     enable = mkEnableOption "enable and configure sway";
-    desktop = mkEnableOption "enable sway for desktop use";
-    laptop = mkEnableOption "enable sway for laptop use";
+    primaryDisplay = mkOption {
+      type = types.str;
+      description = "Primary display identifier";
+      default = "DP-1";
+    };
+    secondaryDisplay = mkOption {
+      type = types.nullOr types.str;
+      description = "Secondary display identifier";
+      default = null;
+    };
     term = mkOption {
       type = types.str;
       description = "Default Terminal";
@@ -287,99 +295,97 @@ in {
         };
       };
     })
-    (mkIf cfg.desktop {
-      wayland.windowManager.sway.config = {
-        output = {
-          "DP-1" = {
-            mode = "2560x1440@165.080Hz";
-            pos = "1080 220";
-            adaptive_sync = "on";
+    (
+      mkIf (cfg.secondaryDisplay != null) {
+        wayland.windowManager.sway.config = {
+          output = {
+            "${cfg.primaryDisplay}" = {
+              mode = "2560x1440@165.080Hz";
+              pos = "1080 220";
+              adaptive_sync = "on";
+            };
+            "${cfg.secondaryDisplay}" = {
+              mode = "1920x1080@60.000Hz";
+              pos = "0 0";
+              transform = "90";
+            };
           };
-          "DP-2" = {
-            mode = "1920x1080@60.000Hz";
-            pos = "0 0";
-            transform = "90";
-          };
-          "HDMI-A-1" = {
-            power = "off";
-            disable = "";
-          };
+
+          workspaceOutputAssign = [
+            {
+              workspace = "1";
+              output = "${cfg.primaryDisplay}";
+            }
+            {
+              workspace = "2";
+              output = "${cfg.primaryDisplay}";
+            }
+            {
+              workspace = "3";
+              output = "${cfg.primaryDisplay}";
+            }
+            {
+              workspace = "4";
+              output = "${cfg.primaryDisplay}";
+            }
+            {
+              workspace = "5";
+              output = "${cfg.primaryDisplay}";
+            }
+            {
+              workspace = "6";
+              output = "${cfg.secondaryDisplay}";
+            }
+            {
+              workspace = "7";
+              output = "${cfg.secondaryDisplay}";
+            }
+            {
+              workspace = "8";
+              output = "${cfg.secondaryDisplay}";
+            }
+            {
+              workspace = "9";
+              output = "${cfg.secondaryDisplay}";
+            }
+            {
+              workspace = "0";
+              output = "${cfg.secondaryDisplay}";
+            }
+          ];
         };
 
-        workspaceOutputAssign = [
-          {
-            workspace = "1";
-            output = "DP-1";
-          }
-          {
-            workspace = "2";
-            output = "DP-1";
-          }
-          {
-            workspace = "3";
-            output = "DP-1";
-          }
-          {
-            workspace = "4";
-            output = "DP-1";
-          }
-          {
-            workspace = "5";
-            output = "DP-1";
-          }
-          {
-            workspace = "6";
-            output = "DP-2";
-          }
-          {
-            workspace = "7";
-            output = "DP-2";
-          }
-          {
-            workspace = "8";
-            output = "DP-2";
-          }
-          {
-            workspace = "9";
-            output = "DP-2";
-          }
-          {
-            workspace = "0";
-            output = "DP-2";
-          }
-        ];
-      };
-
-      programs.waybar.settings = {
-        mainbar = {
-          output = "DP-1";
-          modules-left = [
-            "sway/workspaces"
-          ];
-          modules-center = [
-            "mpris"
-          ];
-          modules-right = [
-            "pulseaudio"
-            "network"
-            "cpu"
-            "memory"
-            "clock"
-            "tray"
-          ];
+        programs.waybar.settings = {
+          mainbar = {
+            output = "${cfg.primaryDisplay}";
+            modules-left = [
+              "sway/workspaces"
+            ];
+            modules-center = [
+              "mpris"
+            ];
+            modules-right = [
+              "pulseaudio"
+              "network"
+              "cpu"
+              "memory"
+              "clock"
+              "tray"
+            ];
+          };
+          clockbar = {
+            output = "${cfg.secondaryDisplay}";
+            position = "bottom";
+            modules-left = ["sway/workspaces"];
+            modules-right = ["clock"];
+          };
         };
-        clockbar = {
-          output = "DP-2";
-          position = "bottom";
-          modules-left = ["sway/workspaces"];
-          modules-right = ["clock"];
-        };
-      };
-    })
-    (mkIf cfg.laptop {
+      }
+    )
+    (mkIf (cfg.secondaryDisplay == null) {
       wayland.windowManager.sway.config = {
         output = {
-          "eDP-1" = {
+          "${cfg.primaryDisplay}" = {
             mode = "1920x10800@240.001Hz";
             adaptive_sync = "on";
           };
@@ -388,30 +394,30 @@ in {
         workspaceOutputAssign = [
           {
             workspace = "1";
-            output = "eDP-1";
+            output = "${cfg.primaryDisplay}";
           }
           {
             workspace = "2";
-            output = "eDP-1";
+            output = "${cfg.primaryDisplay}";
           }
           {
             workspace = "3";
-            output = "eDP-1";
+            output = "${cfg.primaryDisplay}";
           }
           {
             workspace = "4";
-            output = "eDP-1";
+            output = "${cfg.primaryDisplay}";
           }
           {
             workspace = "5";
-            output = "eDP-1";
+            output = "${cfg.primaryDisplay}";
           }
         ];
       };
 
       programs.waybar.settings = {
         mainbar = {
-          output = "eDP-1";
+          output = "${cfg.primaryDisplay}";
           modules-left = [
             "sway/workspaces"
           ];

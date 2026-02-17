@@ -41,7 +41,7 @@ in {
     wms = {
       sway = {
         enable = true;
-        laptop = true;
+        primaryDisplay = "eDP-1";
         term = "alacritty";
         startup = "${toString startupScript} > /home/gunnar/.scripts/startup.log";
       };
