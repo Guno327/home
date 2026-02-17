@@ -14,7 +14,7 @@ in {
   ];
 
   home.packages = with pkgs; [
-    discord
+    mattermost-desktop
   ];
 
   modules = {
@@ -28,9 +28,8 @@ in {
       ssh.enable = true;
       devenv.enable = true;
       alacritty.enable = true;
-      minecraft.enable = true;
       spotify.enable = true;
-      firefox.enable = true;
+      zen.enable = true;
       mpv.enable = true;
     };
 
@@ -41,7 +40,7 @@ in {
     wms = {
       sway = {
         enable = true;
-        laptop = true;
+        primaryDisplay = "eDP-1";
         term = "alacritty";
         startup = "${toString startupScript} > /home/gunnar/.scripts/startup.log";
       };

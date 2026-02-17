@@ -95,6 +95,8 @@
         extraSpecialArgs = {inherit inputs;};
         modules = [
           ./work/laptop.nix
+          zen-browser.homeModules.twilight
+          caelestia-shell.homeManagerModules.default
         ];
       };
     };
