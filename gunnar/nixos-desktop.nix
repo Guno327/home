@@ -23,6 +23,7 @@ in {
     rusty-path-of-building
     orca-slicer
     gemini-cli
+    mattermost-desktop
   ];
 
   modules = {
