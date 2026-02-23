@@ -21,17 +21,15 @@ in {
           email = "accounts@ghov.net";
           signingKey = "BF48B4E0C22B5C18";
         };
-      };
-
-      extraConfig = {
-        user.name = "${config.home.username}";
-        user.email = "accounts@ghov.net";
         init.defaultBranch = "main";
         pull.rebase = true;
-        push.default = "simple";
-        push.followTags = true;
+        push = {
+          default = "simple";
+          followTags = true;
+          recurseSubmodules = "on-demand";
+        };
         fetch.prune = true;
-        submodule.recurse = true;
+        sunmodule.recurse = true;
       };
     };
   };

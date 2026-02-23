@@ -2,7 +2,6 @@
   description = "Home Manager configuration of gunnar";
 
   inputs = {
-    self.submodules = true;
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
@@ -35,10 +34,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nvim-flake = {
-      url = "path:./nvim-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    self.submodules = true;
+    nvim-flake.url = "path:nvim-flake";
   };
 
   outputs = {
