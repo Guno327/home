@@ -3,11 +3,6 @@
   lib,
   ...
 }:
-let
-  startupScript = pkgs.writeScript "startup" ''
-    #!/usr/bin/env bash
-  '';
-in
 {
   imports = [
     ./home.nix
@@ -38,15 +33,6 @@ in
 
     services = {
       gpg.enable = true;
-    };
-
-    wms = {
-      sway = {
-        enable = true;
-        primaryDisplay = "eDP-1";
-        term = "alacritty";
-        startup = "${toString startupScript} > /home/gunnar/.scripts/startup.log";
-      };
     };
   };
   programs.alacritty.settings.font.size = lib.mkForce 12;
