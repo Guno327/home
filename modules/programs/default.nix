@@ -29,7 +29,7 @@
   ];
 
   home.packages = with pkgs; [
-    homeInputs.nvf-flake.packages.${pkgs.stdenv.hostPlatform.system}.default
+    homeInputs.nvim-flake.packages.${pkgs.stdenv.hostPlatform.system}.default
     curl
     wget
     jq

@@ -1,0 +1,3 @@
+[submodule "nvim-flake"]
+	path = nvim-flake
+	url = git@github.com:Guno327/nvim-flake.git

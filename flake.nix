@@ -2,6 +2,7 @@
   description = "Home Manager configuration of gunnar";
 
   inputs = {
+    self.submodules = true;
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
@@ -34,8 +35,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nvf-flake = {
-      url = "github:guno327/nvf-flake";
+    nvim-flake = {
+      url = "path:./nvim-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -46,7 +47,7 @@
     sops-nix,
     zen-browser,
     caelestia-shell,
-    nvf-flake,
+    nvim-flake,
     stylix,
     custom-pkgs,
     ...
