@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   imports = [
     ./home.nix
     ../common
@@ -15,6 +16,7 @@
       fzf.enable = true;
       ssh.enable = true;
       devenv.enable = true;
+      nettools.enable = true;
     };
 
     services = {

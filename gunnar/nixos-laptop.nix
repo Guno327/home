@@ -2,11 +2,13 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   startupScript = pkgs.writeScript "startup" ''
     #!/usr/bin/env bash
   '';
-in {
+in
+{
   imports = [
     ./home.nix
     ../common
@@ -32,6 +34,7 @@ in {
       spotify.enable = true;
       firefox.enable = true;
       mpv.enable = true;
+      nettools.enable = true;
     };
 
     services = {

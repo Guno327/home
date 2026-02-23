@@ -2,13 +2,15 @@
   pkgs,
   homeInputs,
   ...
-}: let
+}:
+let
   startupScript = pkgs.writeScript "startup.sh" ''
     #! /usr/bin/env bash
     discord &
     zen &
   '';
-in {
+in
+{
   imports = [
     ./home.nix
     ../common
@@ -43,6 +45,7 @@ in {
       spotify.enable = true;
       zen.enable = true;
       poetrade.enable = true;
+      nettools.enable = true;
     };
 
     services = {

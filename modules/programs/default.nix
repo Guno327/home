@@ -2,7 +2,8 @@
   homeInputs,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ./kitty.nix
     ./minecraft.nix
@@ -26,12 +27,11 @@
     ./git.nix
     ./ssh.nix
     ./devenv.nix
+    ./nettools.nix
   ];
 
   home.packages = with pkgs; [
     homeInputs.nvim-flake.packages.${pkgs.stdenv.hostPlatform.system}.default
-    curl
-    wget
     jq
     htop
     fd
@@ -41,5 +41,8 @@
     tmux
     just
     nvtopPackages.full
+    pciutils
+    usbutils
+    inetutils
   ];
 }
