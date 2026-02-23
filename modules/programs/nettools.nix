@@ -9,7 +9,7 @@ let
 in
 with lib;
 {
-  cfg.enable = mkEnableOption "enable network diag tools";
+  options.modules.programs.nettools.enable = mkEnableOption "enable network diag tools";
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
