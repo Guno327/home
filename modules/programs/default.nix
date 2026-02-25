@@ -44,5 +44,7 @@
     pciutils
     usbutils
     inetutils
+    cryptsetup
+    gptfdisk
   ];
 }

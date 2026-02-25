@@ -39,7 +39,7 @@ in
       ssh.enable = true;
       devenv.enable = true;
       mpv.enable = true;
-      alacritty.enable = true;
+      foot.enable = true;
       minecraft.enable = true;
       virt-manager.enable = true;
       spotify.enable = true;
@@ -58,7 +58,7 @@ in
         enable = true;
         primaryDisplay = "DP-1";
         secondaryDisplay = "DP-2";
-        term = "alacritty";
+        term = "foot";
         startup = "${toString startupScript} > /home/gunnar/.scripts/startup.log";
       };
     };
