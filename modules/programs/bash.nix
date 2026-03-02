@@ -21,10 +21,17 @@ in
       enable = true;
       force = true;
       text = ''
-        ble-face auto_complete='fg=747369,bg=none'
-        ble-face syntax_default='fg=253'            
-        ble-face command_builtin='fg=144'           
-        ble-face syntax_error='fg=1,bg=none'
+        ble-face -s argument_error bg=#f38ba8,fg=#11111b
+        ble-face -s argument_option fg=#f2cdcd
+        ble-face -s auto_complete fg=#9399b2       
+        ble-face -s command_builtin fg=#fab387
+        ble-face -s command_alias fg=#b4befe
+        ble-face -s command_directory fg=#89b4fa
+        ble-face -s command_keyword fg=#cba6f7
+        ble-face -s syntax_comment fg=#f9e2af
+        ble-face -s syntax_error bg=#f38ba8,fg=#11111b
+        ble-face -s syntax_varname fg=#f5e0dc
+        ble-face -s region bg=#45475a
 
         bleopt complete_auto_complete=1
         bleopt highlight_syntax=1
@@ -65,7 +72,7 @@ in
 
         bashrcExtra = ''
           export PROMPT_DIRTRIM=2
-          PS1='\[\033[0;32m\]\u@\h\[\033[0m\]: \[\033[0;34m\]\w\[\033[0m\]\[\033[0;33m\] $(git branch --show-current 2>/dev/null)\[\033[0m\]\$ '
+          PS1='\[\033[0;32m\]\u@\h\[\033[0m\]: \[\033[0;34m\]\w\[\033[0m\]\[\033[0;33m\] $(git branch --show-current 2>/dev/null)\[\033[0m\]> '
         '';
 
         initExtra = ''
