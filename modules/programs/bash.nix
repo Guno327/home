@@ -68,6 +68,8 @@ in
           "..." = "cd ../..";
           "grep" = "rg";
           "ps" = "procs";
+          "lxc" = "incus";
+          "lxd" = "incus admin";
         };
 
         bashrcExtra = ''
