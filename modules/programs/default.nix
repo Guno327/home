@@ -20,6 +20,7 @@
     ./zen.nix
     ./lg.nix
     ./fish.nix
+    ./bash.nix
     ./fzf.nix
     ./git.nix
     ./ssh.nix

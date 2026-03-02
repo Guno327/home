@@ -17,6 +17,20 @@ in
       devenv
     ];
 
+    home.file.".blerc" = {
+      enable = true;
+      force = true;
+      text = ''
+        ble-face auto_complete='fg=747369,bg=none'
+        ble-face syntax_default='fg=253'            
+        ble-face command_builtin='fg=144'           
+        ble-face syntax_error='fg=1,bg=none'
+
+        bleopt complete_auto_complete=1
+        bleopt highlight_syntax=1
+      '';
+    };
+
     programs = {
       ripgrep.enable = true;
       direnv.enable = true;
@@ -26,7 +40,7 @@ in
         enableBashIntegration = true;
       };
 
-      programs.eza = {
+      eza = {
         enable = true;
         enableBashIntegration = true;
         extraOptions = [
@@ -48,6 +62,11 @@ in
           "grep" = "rg";
           "ps" = "procs";
         };
+
+        bashrcExtra = ''
+          export PROMPT_DIRTRIM=2
+          PS1='\[\033[0;32m\]\u@\h\[\033[0m\]: \[\033[0;34m\]\w\[\033[0m\]\[\033[0;33m\] $(git branch --show-current 2>/dev/null)\[\033[0m\]\$ '
+        '';
 
         initExtra = ''
           source "$(blesh-share)"/ble.sh
