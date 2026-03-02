@@ -21,7 +21,7 @@ in
       enable = true;
       force = true;
       text = ''
-        ble-face -s argument_error bg=#f38ba8,fg=#11111b
+        ble-face -s argument_error fg=#f38ba8
         ble-face -s argument_option fg=#f2cdcd
         ble-face -s auto_complete fg=#9399b2       
         ble-face -s command_builtin fg=#fab387
@@ -29,7 +29,7 @@ in
         ble-face -s command_directory fg=#89b4fa
         ble-face -s command_keyword fg=#cba6f7
         ble-face -s syntax_comment fg=#f9e2af
-        ble-face -s syntax_error bg=#f38ba8,fg=#11111b
+        ble-face -s syntax_error fg=#f38ba8
         ble-face -s syntax_varname fg=#f5e0dc
         ble-face -s region bg=#45475a
 
