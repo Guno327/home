@@ -31,13 +31,9 @@ in
   modules = {
     programs = {
       fish.enable = true;
-      ripgrep.enable = true;
-      zoxide.enable = true;
-      eza.enable = true;
       git.enable = true;
       fzf.enable = true;
       ssh.enable = true;
-      devenv.enable = true;
       mpv.enable = true;
       foot.enable = true;
       minecraft.enable = true;

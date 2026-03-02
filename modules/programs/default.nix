@@ -19,19 +19,16 @@
     ./mpv.nix
     ./zen.nix
     ./lg.nix
-    ./eza.nix
-    ./zoxide.nix
-    ./ripgrep.nix
     ./fish.nix
     ./fzf.nix
     ./git.nix
     ./ssh.nix
-    ./devenv.nix
     ./nettools.nix
   ];
 
   home.packages = with pkgs; [
     homeInputs.nvim-flake.packages.${pkgs.stdenv.hostPlatform.system}.default
+    yq
     jq
     htop
     fd

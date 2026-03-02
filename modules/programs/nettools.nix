@@ -23,6 +23,7 @@ with lib;
       lsof
       curl
       wget
+      sshuttle
     ];
   };
 

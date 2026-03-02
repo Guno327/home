@@ -6,12 +6,13 @@
 }:
 with lib;
 let
-  cfg = config.modules.programs.fish;
+  cfg = config.modules.programs.bash;
 in
 {
-  options.modules.programs.fish.enable = mkEnableOption "enable extended fish configuration";
+  options.modules.programs.bash.enable = mkEnableOption "enable extended bash configuration";
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
+      blesh
       procs
       devenv
     ];
@@ -22,12 +23,12 @@ in
 
       zoxide = {
         enable = true;
-        enableFishIntegration = true;
+        enableBashIntegration = true;
       };
 
-      eza = {
+      programs.eza = {
         enable = true;
-        enableFishIntegration = true;
+        enableBashIntegration = true;
         extraOptions = [
           "-l"
           "--icons"
@@ -35,18 +36,23 @@ in
         ];
       };
 
-      fish = {
+      bash = {
         enable = true;
-        shellAbbrs = {
+
+        shellAliases = {
           "ls" = "eza";
           "la" = "eza -a";
           "lt" = "eza --tree";
+          ".." = "cd ..";
+          "..." = "cd ../..";
           "grep" = "rg";
+          "ps" = "procs";
         };
 
-        shellInit = ''
-          direnv hook fish | source
-          eval $(zoxide init fish --cmd cd)
+        initExtra = ''
+          source "$(blesh-share)"/ble.sh
+          eval "$(direnv hook bash)"
+          eval "$(zoxide init bash --cmd cd)"
         '';
       };
     };
