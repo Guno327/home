@@ -73,8 +73,14 @@ in
         };
 
         bashrcExtra = ''
+          shopt -s histappend
+          export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+          export HISTSIZE=10000 
+          export HISTFILESIZE=1000000
+
           export PROMPT_DIRTRIM=2
           PS1='\[\033[0;32m\]\u@\h\[\033[0m\]: \[\033[0;34m\]\w\[\033[0m\]\[\033[0;33m\] $(git branch --show-current 2>/dev/null)\[\033[0m\]> '
+
           export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
         '';
 
