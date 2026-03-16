@@ -26,6 +26,7 @@ in
     orca-slicer
     gemini-cli
     mattermost-desktop
+    chromium
   ];
 
   modules = {
