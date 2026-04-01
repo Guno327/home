@@ -4,15 +4,18 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.modules.programs.git;
-in {
+in
+{
   options.modules.programs.git.enable = mkEnableOption "enable extended git configuration";
 
   config = mkIf cfg.enable {
     programs.git = {
       enable = true;
       lfs.enable = true;
+      signing.format = "openpgp";
       settings = {
         commit.gpgsign = true;
         gpg.program = "${pkgs.gnupg}/bin/gpg";

@@ -2,7 +2,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   home = {
     username = lib.mkDefault "gunnar";
     homeDirectory = lib.mkDefault "/home/${config.home.username}";
@@ -10,4 +11,5 @@
     stateVersion = "24.05";
   };
   programs.home-manager.enable = true;
+  gtk.gtk4.theme = lib.mkDefault null;
 }
