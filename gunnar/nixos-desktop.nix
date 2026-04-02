@@ -27,6 +27,9 @@ in
     gemini-cli
     mattermost-desktop
     chromium
+    xclicker
+    code-cursor
+    onlyoffice-desktopeditors
   ];
 
   modules = {
