@@ -20,8 +20,6 @@ in
   home.packages = with pkgs; [
     discord
     r2modman
-    homeInputs.custom-pkgs.packages."${stdenv.hostPlatform.system}".balatro-mobile-maker
-    homeInputs.custom-pkgs.packages."${stdenv.hostPlatform.system}".balatro-multiplayer
     rusty-path-of-building
     orca-slicer
     gemini-cli
