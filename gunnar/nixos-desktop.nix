@@ -39,7 +39,7 @@ in
       fzf.enable = true;
       ssh.enable = true;
       mpv.enable = true;
-      foot.enable = true;
+      ghostty.enable = true;
       minecraft.enable = true;
       virt-manager.enable = true;
       spotify.enable = true;
@@ -58,7 +58,7 @@ in
         enable = true;
         primaryDisplay = "HDMI-A-1";
         secondaryDisplay = "DP-1";
-        term = "foot";
+        term = "ghostty";
         startup = "${toString startupScript} > /home/gunnar/.scripts/startup.log";
       };
     };
