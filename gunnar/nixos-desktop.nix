@@ -56,8 +56,8 @@ in
     wms = {
       sway = {
         enable = true;
-        primaryDisplay = "HDMI-A-1";
-        secondaryDisplay = "DP-1";
+        primaryDisplay = "DP-1";
+        secondaryDisplay = "HDMI-A-1";
         term = "ghostty";
         startup = "${toString startupScript} > /home/gunnar/.scripts/startup.log";
       };
