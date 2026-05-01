@@ -17,6 +17,8 @@ in
 
   home.packages = with pkgs; [
     discord
+    moonlight-qt
+    remmina
   ];
 
   modules = {
@@ -25,10 +27,10 @@ in
       git.enable = true;
       fzf.enable = true;
       ssh.enable = true;
-      alacritty.enable = true;
+      ghostty.enable = true;
       minecraft.enable = true;
       spotify.enable = true;
-      firefox.enable = true;
+      zen.enable = true;
       mpv.enable = true;
       nettools.enable = true;
     };
@@ -41,10 +43,9 @@ in
       sway = {
         enable = true;
         primaryDisplay = "eDP-1";
-        term = "alacritty";
+        term = "ghostty";
         startup = "${toString startupScript} > /home/gunnar/.scripts/startup.log";
       };
     };
   };
-  programs.alacritty.settings.font.size = lib.mkForce 12;
 }

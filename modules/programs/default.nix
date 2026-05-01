@@ -28,7 +28,6 @@
   ];
 
   home.packages = with pkgs; [
-    homeInputs.nvim-flake.packages.${pkgs.stdenv.hostPlatform.system}.default
     yq
     jq
     htop

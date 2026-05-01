@@ -33,12 +33,6 @@
       url = "github:guno327/pkgs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nvim-flake = {
-      url = "github:guno327/nvim-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
   };
 
   outputs =
@@ -48,7 +42,6 @@
       sops-nix,
       zen-browser,
       caelestia-shell,
-      nvim-flake,
       stylix,
       custom-pkgs,
       ...
