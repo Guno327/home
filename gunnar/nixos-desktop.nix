@@ -28,6 +28,8 @@ in
     xclicker
     code-cursor
     onlyoffice-desktopeditors
+    moonlight-qt
+    remmina
   ];
 
   modules = {
@@ -54,8 +56,8 @@ in
     wms = {
       sway = {
         enable = true;
-        primaryDisplay = "DP-1";
-        secondaryDisplay = "DP-2";
+        primaryDisplay = "HDMI-A-1";
+        secondaryDisplay = "DP-1";
         term = "foot";
         startup = "${toString startupScript} > /home/gunnar/.scripts/startup.log";
       };
