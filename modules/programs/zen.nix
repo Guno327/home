@@ -4,15 +4,18 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.modules.programs.zen;
-in {
+in
+{
   options.modules.programs.zen.enable = mkEnableOption "Install and configure zen";
 
   config = mkIf cfg.enable {
+    stylix.targets.zen-browser.profileNames = [ "Gunnar" ];
     programs.zen-browser = {
       enable = true;
-      nativeMessagingHosts = [pkgs.firefoxpwa];
+      nativeMessagingHosts = [ pkgs.firefoxpwa ];
 
       policies = {
         FirefoxHome.Search = true;
