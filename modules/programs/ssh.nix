@@ -15,7 +15,6 @@ in
       enableDefaultConfig = false;
       matchBlocks = {
         "*" = {
-          host = "*";
           setEnv = {
             TERM = "xterm-256color";
           };
