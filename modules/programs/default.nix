@@ -1,5 +1,4 @@
 {
-  homeInputs,
   pkgs,
   ...
 }:
