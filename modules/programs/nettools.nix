@@ -24,6 +24,7 @@ with lib;
       curl
       wget
       sshuttle
+      iperf3
     ];
   };
 
