@@ -16,24 +16,19 @@
 
   modules = {
     programs = {
-      fish.enable = true;
-      ripgrep.enable = true;
-      zoxide.enable = true;
-      eza.enable = true;
+      bash.enable = true;
       git.enable = true;
       fzf.enable = true;
       ssh.enable = true;
-      devenv.enable = true;
-      alacritty.enable = true;
+      ghostty.enable = true;
       spotify.enable = true;
       zen.enable = true;
       mpv.enable = true;
-      netools.enable = true;
+      nettools.enable = true;
     };
 
     services = {
       gpg.enable = true;
     };
   };
-  programs.alacritty.settings.font.size = lib.mkForce 12;
 }

@@ -33,6 +33,11 @@
       url = "github:guno327/pkgs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nvim-flake = {
+      url = "github:guno327/nvim-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -44,6 +49,7 @@
       caelestia-shell,
       stylix,
       custom-pkgs,
+      nvim-flake,
       ...
     }@inputs:
     let
@@ -87,12 +93,6 @@
 
       # Generic Linux configurations
       homeConfigurations = {
-        "gunnar@ubuntu-desktop" = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = { inherit inputs; };
-          modules = [
-          ];
-        };
         "gunnar@work-laptop" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = { inherit inputs; };
@@ -100,6 +100,7 @@
             ./work/laptop.nix
             zen-browser.homeModules.twilight
             caelestia-shell.homeManagerModules.default
+            stylix.homeModules.stylix
           ];
         };
       };
