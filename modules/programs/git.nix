@@ -12,6 +12,7 @@ in
   options.modules.programs.git.enable = mkEnableOption "enable extended git configuration";
 
   config = mkIf cfg.enable {
+    home.programs = with pkgs; [ git-review ];
     programs.git = {
       enable = true;
       lfs.enable = true;

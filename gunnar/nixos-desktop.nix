@@ -30,6 +30,12 @@ in
     onlyoffice-desktopeditors
     moonlight-qt
     remmina
+    gimp
+    homeInputs.custom-pkgs.packages."${stdenv.hostPlatform.system}".btd700ctl
+    btop
+    openconnect
+    nebula
+    inkscapE
   ];
 
   modules = {

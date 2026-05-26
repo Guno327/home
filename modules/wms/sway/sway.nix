@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.modules.wms.sway;
-in {
+in
+{
   options.modules.wms.sway = {
     enable = mkEnableOption "enable and configure sway";
     primaryDisplay = mkOption {
@@ -69,35 +71,37 @@ in {
       wayland.windowManager.sway = {
         enable = true;
         wrapperFeatures.gtk = true;
-        systemd.variables = ["--all"];
+        systemd.variables = [ "--all" ];
         config = {
           modifier = "Mod4";
           terminal = cfg.term;
-          bars = [];
+          bars = [ ];
 
           startup = [
-            {command = "waybar";}
-            {command = "swaync";}
-            {command = "swaybg -m center -i ${cfg.wallpaper}";}
-            {command = cfg.startup;}
+            { command = "waybar"; }
+            { command = "swaync"; }
+            { command = "swaybg -m center -i ${cfg.wallpaper}"; }
+            { command = cfg.startup; }
           ];
 
           assigns = {
             "2" = [
-              {app_id = "firefox";}
-              {app_id = "zen";}
+              { app_id = "firefox"; }
+              { app_id = "zen"; }
             ];
-            "3" = [{app_id = "steam";}];
+            "3" = [ { app_id = "steam"; } ];
             "6" = [
-              {app_id = "discord";}
-              {app_id = "WebCord";}
+              { app_id = "discord"; }
+              { app_id = "WebCord"; }
             ];
           };
 
           window.commands = [
             {
               command = "inhibit_idle fullscreen";
-              criteria = {app_id = "^.*";};
+              criteria = {
+                app_id = "^.*";
+              };
             }
           ];
 
@@ -107,9 +111,10 @@ in {
             };
           };
 
-          keybindings = let
-            mod = config.wayland.windowManager.sway.config.modifier;
-          in
+          keybindings =
+            let
+              mod = config.wayland.windowManager.sway.config.modifier;
+            in
             mkOptionDefault {
               "${mod}+v" = "floating toggle";
               "${mod}+c" = "kill";
@@ -295,93 +300,91 @@ in {
         };
       };
     })
-    (
-      mkIf (cfg.secondaryDisplay != null) {
-        wayland.windowManager.sway.config = {
-          output = {
-            "${cfg.primaryDisplay}" = {
-              mode = "2560x1440@165.080Hz";
-              pos = "1080 220";
-              adaptive_sync = "on";
-            };
-            "${cfg.secondaryDisplay}" = {
-              mode = "1920x1080@60.000Hz";
-              pos = "0 0";
-              transform = "90";
-            };
+    (mkIf (cfg.secondaryDisplay != null) {
+      wayland.windowManager.sway.config = {
+        output = {
+          "${cfg.primaryDisplay}" = {
+            mode = "2560x1440@143.912Hz";
+            pos = "1080 220";
+            adaptive_sync = "on";
           };
+          "${cfg.secondaryDisplay}" = {
+            mode = "1920x1080@60.000Hz";
+            pos = "0 0";
+            transform = "90";
+          };
+        };
 
-          workspaceOutputAssign = [
-            {
-              workspace = "1";
-              output = "${cfg.primaryDisplay}";
-            }
-            {
-              workspace = "2";
-              output = "${cfg.primaryDisplay}";
-            }
-            {
-              workspace = "3";
-              output = "${cfg.primaryDisplay}";
-            }
-            {
-              workspace = "4";
-              output = "${cfg.primaryDisplay}";
-            }
-            {
-              workspace = "5";
-              output = "${cfg.primaryDisplay}";
-            }
-            {
-              workspace = "6";
-              output = "${cfg.secondaryDisplay}";
-            }
-            {
-              workspace = "7";
-              output = "${cfg.secondaryDisplay}";
-            }
-            {
-              workspace = "8";
-              output = "${cfg.secondaryDisplay}";
-            }
-            {
-              workspace = "9";
-              output = "${cfg.secondaryDisplay}";
-            }
-            {
-              workspace = "0";
-              output = "${cfg.secondaryDisplay}";
-            }
+        workspaceOutputAssign = [
+          {
+            workspace = "1";
+            output = "${cfg.primaryDisplay}";
+          }
+          {
+            workspace = "2";
+            output = "${cfg.primaryDisplay}";
+          }
+          {
+            workspace = "3";
+            output = "${cfg.primaryDisplay}";
+          }
+          {
+            workspace = "4";
+            output = "${cfg.primaryDisplay}";
+          }
+          {
+            workspace = "5";
+            output = "${cfg.primaryDisplay}";
+          }
+          {
+            workspace = "6";
+            output = "${cfg.secondaryDisplay}";
+          }
+          {
+            workspace = "7";
+            output = "${cfg.secondaryDisplay}";
+          }
+          {
+            workspace = "8";
+            output = "${cfg.secondaryDisplay}";
+          }
+          {
+            workspace = "9";
+            output = "${cfg.secondaryDisplay}";
+          }
+          {
+            workspace = "0";
+            output = "${cfg.secondaryDisplay}";
+          }
+        ];
+      };
+
+      programs.waybar.settings = {
+        mainbar = {
+          output = "${cfg.primaryDisplay}";
+          modules-left = [
+            "sway/workspaces"
+          ];
+          modules-center = [
+            "mpris"
+          ];
+          modules-right = [
+            "pulseaudio"
+            "network"
+            "cpu"
+            "memory"
+            "clock"
+            "tray"
           ];
         };
-
-        programs.waybar.settings = {
-          mainbar = {
-            output = "${cfg.primaryDisplay}";
-            modules-left = [
-              "sway/workspaces"
-            ];
-            modules-center = [
-              "mpris"
-            ];
-            modules-right = [
-              "pulseaudio"
-              "network"
-              "cpu"
-              "memory"
-              "clock"
-              "tray"
-            ];
-          };
-          clockbar = {
-            output = "${cfg.secondaryDisplay}";
-            position = "bottom";
-            modules-left = ["sway/workspaces"];
-            modules-right = ["clock"];
-          };
+        clockbar = {
+          output = "${cfg.secondaryDisplay}";
+          position = "bottom";
+          modules-left = [ "sway/workspaces" ];
+          modules-right = [ "clock" ];
         };
-      }
-    )
+      };
+    })
     (mkIf (cfg.secondaryDisplay == null) {
       wayland.windowManager.sway.config = {
         output = {
