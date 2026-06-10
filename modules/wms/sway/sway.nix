@@ -171,6 +171,8 @@ in
               "${mod}+Shift+d" = "exec wofi --show drun";
               "${mod}+n" = "exec swaync-client -t -sw";
               "${mod}+Return" = "exec ${cfg.term}";
+              "${mod}+m" =
+                ''exec sh -c "pactl set-source-mute easyeffects_source toggle && pactl get-source-mute easyeffects_source | grep -q yes && notify-send 'Mic muted' || notify-send 'Mic unmuted'"'';
               "${mod}+l" = ''
                 exec swaylock \
                 --screenshots \
@@ -295,6 +297,14 @@ in
               memory = {
                 format = " {percentage}% ";
               };
+
+              "custom/mic" = {
+                exec = ''pactl get-source-mute @DEFAULT_SOURCE@ | grep -q yes && echo '{"text":"󰍭","class":"muted"}' || echo '{"text":"󰍬","class":"live"}' '';
+                return-type = "json";
+                interval = 1;
+                on-click = "pactl set-source-mute @DEFAULT_SOURCE@ toggle";
+                tooltip = false;
+              };
             };
           };
         };
@@ -369,6 +379,7 @@ in
             "mpris"
           ];
           modules-right = [
+            "custom/mic"
             "pulseaudio"
             "network"
             "cpu"

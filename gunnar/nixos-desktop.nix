@@ -35,7 +35,6 @@ in
     btop
     openconnect
     nebula
-    inkscapE
   ];
 
   modules = {
