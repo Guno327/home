@@ -42,6 +42,8 @@ in
           "la" = "eza -a";
           "lt" = "eza --tree";
           "grep" = "rg";
+          "lxc" = "incus";
+          "lxd" = "incus admin";
         };
 
         shellInit = ''
