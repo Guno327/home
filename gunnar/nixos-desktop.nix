@@ -34,7 +34,7 @@ in
 
   modules = {
     programs = {
-      bash.enable = true;
+      fish.enable = true;
       git.enable = true;
       fzf.enable = true;
       ssh.enable = true;
