@@ -1,4 +1,5 @@
 {
+  pkgs,
   config,
   lib,
   ...
@@ -18,6 +19,9 @@ in
           setEnv = {
             TERM = "xterm-256color";
           };
+        };
+        "*.canonical.is" = {
+          proxyCommand = "${pkgs.cloudflared}/bin/cloudflared access ssh -hostname %h";
         };
         lighthouse = {
           host = "lighthouse";
@@ -42,6 +46,12 @@ in
         laptop = {
           host = "laptop";
           hostname = "100.100.0.4";
+        };
+        feclaw = {
+          user = "feclaw";
+          host = "feclaw";
+          hostname = "mytheory.net";
+          port = 8889;
         };
       };
     };

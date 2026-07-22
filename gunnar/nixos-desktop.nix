@@ -51,6 +51,7 @@ in
       zen.enable = true;
       poetrade.enable = true;
       nettools.enable = true;
+      openscad.enable = true;
     };
 
     services = {

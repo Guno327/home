@@ -24,6 +24,7 @@
     ./git.nix
     ./ssh.nix
     ./nettools.nix
+    ./openscad.nix
   ];
 
   home.packages = with pkgs; [
