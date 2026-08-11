@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.modules.services.gpg;
-in {
+in
+{
   options.modules.services.gpg.enable = mkEnableOption "enable extended gpg configuration";
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
@@ -32,6 +34,6 @@ in {
       '';
     };
 
-    programs.ssh.matchBlocks."*".match = "host * exec \"gpg-connect-agent UPDATESTARTUPTTY /bye\"";
+    programs.ssh.settings."*".match = "host * exec \"gpg-connect-agent UPDATESTARTUPTTY /bye\"";
   };
 }

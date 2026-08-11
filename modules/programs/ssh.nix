@@ -11,47 +11,39 @@ in
 {
   options.modules.programs.ssh.enable = mkEnableOption "Enable and configure ssh";
   config = mkIf cfg.enable {
+    home.packages = with pkgs; [ cloudflared ];
     programs.ssh = {
       enable = true;
       enableDefaultConfig = false;
-      matchBlocks = {
+      settings = {
         "*" = {
-          setEnv = {
+          SetEnv = {
             TERM = "xterm-256color";
           };
+          ForwardAgent = false;
+          AddKeysToAgent = "no";
+          Compression = false;
+          ServerAliveInterval = 0;
+          ServerAliveCountMax = 3;
+          HashKnownHosts = false;
+          UserKnownHostsFile = "~/.ssh/known_hosts";
+          ControlMaster = "no";
+          ControlPath = "~/.ssh/master-%r@%n:%p";
+          ControlPersist = "no";
         };
         "*.canonical.is" = {
-          proxyCommand = "${pkgs.cloudflared}/bin/cloudflared access ssh -hostname %h";
+          ProxyCommand = "${pkgs.cloudflared}/bin/cloudflared access ssh -hostname %h";
         };
-        lighthouse = {
-          host = "lighthouse";
-          hostname = "100.100.0.1";
-        };
-        jumphost = {
-          host = "jumphost";
-          hostname = "100.100.0.10";
-        };
-        printer = {
-          host = "printer";
-          hostname = "100.100.0.8";
-        };
-        server = {
-          host = "server";
-          hostname = "100.100.0.2";
-        };
-        desktop = {
-          host = "desktop";
-          hostname = "100.100.0.3";
-        };
-        laptop = {
-          host = "laptop";
-          hostname = "100.100.0.4";
-        };
+        lighthouse.HostName = "100.100.0.1";
+        jumphost.HostName = "100.100.0.10";
+        printer.HostName = "100.100.0.8";
+        server.HostName = "100.100.0.2";
+        desktop.HostName = "100.100.0.3";
+        laptop.HostName = "100.100.0.4";
         feclaw = {
-          user = "feclaw";
-          host = "feclaw";
-          hostname = "mytheory.net";
-          port = 8889;
+          User = "feclaw";
+          HostName = "mytheory.net";
+          Port = 8889;
         };
       };
     };

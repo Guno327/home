@@ -11,7 +11,7 @@ let
     owner = "BelfrySCAD";
     repo = "BOSL2";
     rev = "master";
-    sha256 = "sha256-J0dkeHYlh2UFiAwubVvV8gx03RJ1BPBfqkn6Y4qUEVI=";
+    sha256 = "sha256-ErSJxw1hLlnyUQCXBChwBrN9kS6+l4KXYvu9bBO1m6w=";
   };
 in
 {

@@ -22,7 +22,6 @@ in
     r2modman
     rusty-path-of-building
     orca-slicer
-    gemini-cli
     mattermost-desktop
     chromium
     xclicker
