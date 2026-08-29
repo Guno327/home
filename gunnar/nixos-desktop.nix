@@ -33,16 +33,7 @@ in
     btop
     openconnect
     nebula
-    (pkgs.symlinkJoin {
-      name = "moonlight-qt-xwayland";
-      paths = [ pkgs.moonlight-qt ];
-      buildInputs = [ pkgs.makeWrapper ];
-      postBuild = ''
-        wrapProgram $out/bin/moonlight \
-          --set QT_QPA_PLATFORM xcb \
-          --set SDL_VIDEODRIVER x11
-      '';
-    })
+    moonlight-qt
   ];
 
   modules = {
@@ -70,10 +61,36 @@ in
     wms = {
       sway = {
         enable = true;
-        primaryDisplay = "DP-1";
-        secondaryDisplay = "HDMI-A-1";
         term = "ghostty";
         startup = "${toString startupScript} > /home/gunnar/.scripts/startup.log";
+        displays = {
+          "Dell Inc. DELL S2721DGF 3DRTP83" = {
+            mode = "2560x1440@143.912Hz";
+            position = "1080 220";
+            adaptiveSync = true;
+            workspaces = [
+              "1"
+              "2"
+              "3"
+              "4"
+              "5"
+            ];
+            bar = "full";
+          };
+          "NEC Corporation E243WMi 44107212NA" = {
+            mode = "1920x1080@60.000Hz";
+            position = "0 0";
+            transform = "90";
+            workspaces = [
+              "6"
+              "7"
+              "8"
+              "9"
+              "0"
+            ];
+            bar = "minimal";
+          };
+        };
       };
     };
   };
