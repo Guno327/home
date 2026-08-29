@@ -11,10 +11,6 @@ in
 {
   options.modules.services.gpg.enable = mkEnableOption "enable extended gpg configuration";
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      pinentry-gtk2
-    ];
-
     programs.gpg = {
       enable = true;
       mutableKeys = true;

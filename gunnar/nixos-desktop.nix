@@ -27,13 +27,22 @@ in
     xclicker
     code-cursor
     onlyoffice-desktopeditors
-    moonlight-qt
     remmina
     gimp
     homeInputs.custom-pkgs.packages."${stdenv.hostPlatform.system}".btd700ctl
     btop
     openconnect
     nebula
+    (pkgs.symlinkJoin {
+      name = "moonlight-qt-xwayland";
+      paths = [ pkgs.moonlight-qt ];
+      buildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        wrapProgram $out/bin/moonlight \
+          --set QT_QPA_PLATFORM xcb \
+          --set SDL_VIDEODRIVER x11
+      '';
+    })
   ];
 
   modules = {
