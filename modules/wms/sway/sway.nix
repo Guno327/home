@@ -201,7 +201,7 @@ in
     wallpaper = mkOption {
       type = types.path;
       description = "Path to wallpaper svg";
-      default = "/home/${config.home.username}/.bg.svg";
+      default = "/flake/home/modules/wms/bg.svg";
     };
   };
 
