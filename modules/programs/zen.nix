@@ -27,8 +27,14 @@ in
               URLTemplate = "https://search.brave.com/search?q={searchTerms}";
               Method = "GET";
             }
+            {
+              Name = "SearXNG";
+              IconURL = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/searxng.svg";
+              URLTemplate = "https://search.ghov.net/search?q={searchTerms}&category_general=on&language=auto&time_range=&safesearch=0&theme=simple";
+              Method = "GET";
+            }
           ];
-          Default = "Brave";
+          Default = "SearXNG";
         };
       };
     };
