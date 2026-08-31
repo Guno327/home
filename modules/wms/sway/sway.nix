@@ -373,6 +373,7 @@ in
               --effect-vignette 0.5:0.5 \
               --fade-in 0.2
             '';
+            "--locked ${mod}+Shift+s" = "exec systemctl suspend";
           };
       };
     };
