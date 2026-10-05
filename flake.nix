@@ -62,7 +62,7 @@
         nixos-desktop = {
           imports = [
             ./gunnar/nixos-desktop.nix
-            zen-browser.homeModules.twilight
+            zen-browser.homeModules.beta
             caelestia-shell.homeManagerModules.default
           ];
           _module.args = {
@@ -72,7 +72,7 @@
         nixos-laptop = {
           imports = [
             ./gunnar/nixos-laptop.nix
-            zen-browser.homeModules.twilight
+            zen-browser.homeModules.beta
             caelestia-shell.homeManagerModules.default
           ];
           _module.args = {
@@ -82,7 +82,7 @@
         nixos-server = {
           imports = [
             ./gunnar/nixos-server.nix
-            zen-browser.homeModules.twilight
+            zen-browser.homeModules.beta
             caelestia-shell.homeManagerModules.default
           ];
           _module.args = {
@@ -98,7 +98,7 @@
           extraSpecialArgs = { inherit inputs; };
           modules = [
             ./work/laptop.nix
-            zen-browser.homeModules.twilight
+            zen-browser.homeModules.beta
             caelestia-shell.homeManagerModules.default
             stylix.homeModules.stylix
           ];
