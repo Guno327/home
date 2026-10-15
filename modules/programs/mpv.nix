@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.modules.programs.mpv;
-in {
+in
+{
   options.modules.programs.mpv.enable = mkEnableOption "enable extended mpv configuration";
   config = mkIf cfg.enable {
     programs.yt-dlp = {

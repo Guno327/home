@@ -1,6 +1,7 @@
 {
   pkgs,
   homeInputs,
+  lib,
   ...
 }:
 let
@@ -33,7 +34,9 @@ in
     btop
     openconnect
     nebula
-    moonlight-qt
+
+    gh
+    unzip
   ];
 
   modules = {
@@ -45,12 +48,12 @@ in
       mpv.enable = true;
       ghostty.enable = true;
       minecraft.enable = true;
-      virt-manager.enable = true;
       spotify.enable = true;
       zen.enable = true;
       poetrade.enable = true;
       nettools.enable = true;
       openscad.enable = true;
+      moonlight.enable = true;
     };
 
     services = {
@@ -63,9 +66,10 @@ in
         enable = true;
         term = "ghostty";
         startup = "${toString startupScript} > /home/gunnar/.scripts/startup.log";
+        workspaceFallback = [ "DP-1" ];
         displays = {
           "Dell Inc. DELL S2721DGF 3DRTP83" = {
-            mode = "2560x1440@143.912Hz";
+            mode = "2560x1440@144.00Hz";
             position = "1080 220";
             adaptiveSync = true;
             workspaces = [
@@ -90,8 +94,25 @@ in
             ];
             bar = "minimal";
           };
+
         };
       };
     };
   };
+
+  wayland.windowManager.sway.extraConfig = ''
+    bindswitch --reload --locked lid:on output eDP-1 disable
+    bindswitch --reload --locked lid:off output eDP-1 enable
+  '';
+
+  nixpkgs.overlays = [
+    (final: prev: {
+      moonlight-qt = prev.moonlight-qt.override {
+        SDL2 =
+          (import homeInputs.nixpkgs-2511 {
+            system = prev.stdenv.hostPlatform.system;
+          }).SDL2_classic;
+      };
+    })
+  ];
 }

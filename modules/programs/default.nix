@@ -25,6 +25,7 @@
     ./ssh.nix
     ./nettools.nix
     ./openscad.nix
+    ./moonlight.nix
   ];
 
   home.packages = with pkgs; [
