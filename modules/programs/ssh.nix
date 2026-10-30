@@ -35,11 +35,15 @@ in
           ProxyCommand = "${pkgs.cloudflared}/bin/cloudflared access ssh -hostname %h";
         };
         lighthouse.HostName = "100.100.0.1";
-        jumphost.HostName = "100.100.0.10";
+        server.HostName = "100.100.0.3";
+        desktop.HostName = "100.100.0.4";
+        game-server.HostName = "100.100.0.5";
+        laptop.HostName = "100.100.0.6";
+        phone.HostName = "100.100.0.7";
         printer.HostName = "100.100.0.8";
-        server.HostName = "100.100.0.2";
-        desktop.HostName = "100.100.0.3";
-        laptop.HostName = "100.100.0.4";
+        jumphost-1.HostName = "100.100.0.101";
+        jumphost-2.HostName = "100.100.0.102";
+        jumphost-3.HostName = "100.100.0.103";
         feclaw = {
           User = "feclaw";
           HostName = "mytheory.net";
