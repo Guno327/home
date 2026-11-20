@@ -7,8 +7,8 @@
 let
   startupScript = pkgs.writeScript "startup.sh" ''
     #! /usr/bin/env bash
-    discord &
     zen &
+    discord &
   '';
 in
 {
@@ -31,10 +31,10 @@ in
     remmina
     gimp
     homeInputs.custom-pkgs.packages."${stdenv.hostPlatform.system}".btd700ctl
+    homeInputs.custom-pkgs.packages."${stdenv.hostPlatform.system}".omnircm
     btop
     openconnect
     nebula
-
     gh
     unzip
   ];
@@ -46,7 +46,7 @@ in
       fzf.enable = true;
       ssh.enable = true;
       mpv.enable = true;
-      ghostty.enable = true;
+      foot.enable = true;
       minecraft.enable = true;
       spotify.enable = true;
       zen.enable = true;
@@ -64,7 +64,7 @@ in
     wms = {
       sway = {
         enable = true;
-        term = "ghostty";
+        term = "foot";
         startup = "${toString startupScript} > /home/gunnar/.scripts/startup.log";
         workspaceFallback = [ "DP-1" ];
         displays = {
@@ -99,11 +99,6 @@ in
       };
     };
   };
-
-  wayland.windowManager.sway.extraConfig = ''
-    bindswitch --reload --locked lid:on output eDP-1 disable
-    bindswitch --reload --locked lid:off output eDP-1 enable
-  '';
 
   nixpkgs.overlays = [
     (final: prev: {

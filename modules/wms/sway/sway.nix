@@ -278,7 +278,13 @@ in
             { app_id = "firefox"; }
             { app_id = "zen"; }
           ];
-          "3" = [ { app_id = "steam"; } ];
+          "3" = [
+            { app_id = "steam"; }
+            {
+              app_id = "com.moonlight_stream.Moonlight";
+              title = " - Moonlight$";
+            }
+          ];
           "6" = [
             { app_id = "discord"; }
             { app_id = "WebCord"; }
@@ -392,8 +398,6 @@ in
               "network"
               "cpu"
               "memory"
-              "battery"
-              "backlight"
               "clock"
               "tray"
             ];
